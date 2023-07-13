@@ -20,37 +20,29 @@ function mostrarProductos(itemsProductos) {
         });
     });
 }
-
-mostrarProductos(productos); 
-const arrayVacio = [];
+function detalleProducto (){
+    const contenedorCardDos = document.getElementById("detalle-producto")
+}
 
 
 function agregarAlCarrito (id){
     let productoEnLista = productos.find(prod =>prod.id === parseInt(id));
-    arrayVacio.push(productoEnLista);
-    console.log(arrayVacio);
+    carritoArray.push(productoEnLista);
+    console.log(carritoArray);
+    storage(carritoArray);
 
 }
 
 function storage (items){
-    localStorage.setItem("Producto", JSON.stringify(items));
-    const traerItems = JSON.parse(localStorage.getItem("producto"));
+    localStorage.setItem("producto", JSON.stringify(items));
+    const productoSeleccionado = carritoArray.reduce((acc, el)=> acc += `${el.nombre} -$ ${el.precio}\n`, "");
+    alert(productoSeleccionado);
+
 }
 
-storage(arrayVacio);
 
-
-/* 
-
-const cosas = [{nombre:"Galletas", precio:25},
-{nombre:"dulce", precio:40}];
+mostrarProductos(productos); 
+const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
 
 
 
-
-function storage (productos){
-    localStorage.setItem("productos", JSON.stringify(productos));
-    const traerItems = JSON.parse(localStorage.getItem("productos"));
-    alert(traerItems);
-}
-storage(cosas); */
