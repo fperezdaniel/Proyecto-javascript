@@ -21,20 +21,47 @@ function mostrarProductos(itemsProductos) {
     });
 }
 const contenedorCardDos = document.getElementById("detalle-producto");
+const carritoArrayDos = JSON.parse(localStorage.getItem("producto")) || [];
+console.log(carritoArrayDos);
 function detalleProducto() {
-    carritoArray.forEach(prod => {
+    carritoArrayDos.forEach(prod => {
         const cardDos = document.createElement("div");
-        contenedorCardDos.innerHTML = `
-        <div class="main__detalles">
-        <p class="product__description">${prod.nombre}</p>
-        <p class="precio">${prod.precio}</p>
-        <button id="${prod.id}" class="button__agregar">Cancelar</button>
-        </div>`;
+        contenedorCardDos.innerHTML = `<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            ${prod.nombre} 
+            $${prod.precio}
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Cancelar</button>
+            </div>
+        </div>
+        </div>
+    </div>`;
         contenedorCardDos.appendChild(cardDos);
-    })
+    });
 }
 
 
+function itemsModal (){
+    let itemDelModal = id.find(prod=>prod.id ===parseInt(id));
+    carritoArrayDos.push(itemDelModal);
+    console.log(carritoArrayDos);
+}
+
+
+
+
+
+const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
 function agregarAlCarrito(id) {
     let productoEnLista = productos.find(prod => prod.id === parseInt(id));
     carritoArray.push(productoEnLista);
@@ -46,15 +73,15 @@ function agregarAlCarrito(id) {
 function storage(items) {
     localStorage.setItem("producto", JSON.stringify(items));
     const productoSeleccionado = carritoArray.reduce((acc, el) => acc += `${el.nombre} -$ ${el.precio}\n`, "");
-    alert(productoSeleccionado);
+    //alert(productoSeleccionado);
 
 }
 
 
 mostrarProductos(productos);
-detalleProducto()
+detalleProducto();
+itemsModal();
 
-const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
 
 
 
