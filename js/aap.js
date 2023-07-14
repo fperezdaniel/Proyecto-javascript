@@ -8,80 +8,53 @@ function mostrarProductos(itemsProductos) {
         card.innerHTML = `<img class="producto__img img--product" src="${el.img}" alt="${el.nombre}">
         <div  class="main__detalles">
         <p class="product__description">${el.nombre}</p>
-        <p class="precio">${el.precio}</p>
-        <button id="${el.id}" class="button__agregar">Comprar</button>
+        <p class="precio">$${el.precio}</p>
+        <button id="${el.id}" class="button__agregar">ver detalle</button>
         </div>`;
         contenedorCard.appendChild(card);
     });
     const bottonCompra = document.querySelectorAll(".button__agregar");
-    bottonCompra.forEach(item => {
-        item.addEventListener("click", (e) => {
-            agregarAlCarrito(e.target.id)
-        });
-    });
-}
-const contenedorCardDos = document.getElementById("detalle-producto");
-const carritoArrayDos = JSON.parse(localStorage.getItem("producto")) || [];
-console.log(carritoArrayDos);
-function detalleProducto() {
-    carritoArrayDos.forEach(prod => {
-        const cardDos = document.createElement("div");
-        contenedorCardDos.innerHTML = `<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            ${prod.nombre} 
-            $${prod.precio}
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Cancelar</button>
-            </div>
-        </div>
-        </div>
-    </div>`;
-        contenedorCardDos.appendChild(cardDos);
+    bottonCompra.forEach(btn => {
+        btn.addEventListener("click", mostrarDetalle);
     });
 }
 
+function mostrarDetalle(e) {
+    const contenedorDetalle = document.getElementById("detalle-producto");
+    contenedorDetalle.innerHTML=``;
+    console.log(contenedorDetalle);
+    const id = parseInt(e.target.id);
+    const productoEnContrado = productos.find(p => p.id === id);
+    console.log(productoEnContrado);
+    const cardDos = document.createElement("div");
+    cardDos.setAttribute("class", "contenedor__modal")
+    cardDos.innerHTML = `
+    <img src="${productoEnContrado.img}" alt="${productoEnContrado.nombre}">
+    <p class="product__description">${productoEnContrado.nombre}</p>
+    <p>$${productoEnContrado.precio}</p>
+    <button id="${productoEnContrado.id}" class="button__detalles">Comprar</button>
+    <button  class="button__detalles">Cancelar</button>
+    `;
+    contenedorDetalle.appendChild(cardDos);
 
-function itemsModal (){
-    let itemDelModal = id.find(prod=>prod.id ===parseInt(id));
-    carritoArrayDos.push(itemDelModal);
-    console.log(carritoArrayDos);
+    const btnComprar = document.querySelector(".button__detalles");
+    console.log(btnComprar);
+    btnComprar.addEventListener("click", ()=>alert(`Felicidades realizaste la compra de ${productoEnContrado.nombre}`));
 }
-
-
-
 
 
 const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
-function agregarAlCarrito(id) {
-    let productoEnLista = productos.find(prod => prod.id === parseInt(id));
+function agregarAlCarrito(e) {
+    const id = parseInt(e.target.id)
+    let productoEnLista = productos.find(prod => prod.id === id);
     carritoArray.push(productoEnLista);
     console.log(carritoArray);
     storage(carritoArray);
 
 }
 
-function storage(items) {
-    localStorage.setItem("producto", JSON.stringify(items));
-    const productoSeleccionado = carritoArray.reduce((acc, el) => acc += `${el.nombre} -$ ${el.precio}\n`, "");
-    //alert(productoSeleccionado);
 
-}
 
 
 mostrarProductos(productos);
-detalleProducto();
-itemsModal();
-
-
-
 
