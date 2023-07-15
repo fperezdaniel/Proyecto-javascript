@@ -179,7 +179,15 @@ img{
         background-color: rgb(239, 233, 233);
         color: #3771f8;
     }
-
+    .button__detalles {
+        display: block;
+        background-color: #3771f8;
+        color: white;
+        width: 250px;
+        height: 40px;
+        text-transform: uppercase;
+        border-radius: 10px;
+    }
 
     /* Footer */
     .footer__container {
