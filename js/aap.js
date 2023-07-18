@@ -105,11 +105,14 @@ function formulario() {
         !validacionFormulario ? Swal.fire({
             icon: 'error',
             title: 'Algo salio mal ....!!!!',
-            confirmButtonText:`Aceptar`,
+            confirmButtonText: `Aceptar`,
             text: 'Por favor completar todos los campos',
+            confirmButtonColor:' #3771f8',
+            
         }) : Swal.fire({
             title: 'Nos contactaremos a la brevedad con usted ...!!!',
-            confirmButtonText:`Aceptar`,
+            confirmButtonText: `Aceptar`,
+            confirmButtonColor:' #3771f8',
             showClass: {
                 popup: 'animate__animated animate__fadeInDown'
             },
