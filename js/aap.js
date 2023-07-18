@@ -107,6 +107,7 @@ function formulario() {
             title: 'Algo salio mal ....!!!!',
             confirmButtonText: `Aceptar`,
             text: 'Por favor completar todos los campos',
+            
             confirmButtonColor:' #3771f8',
             
         }) : Swal.fire({
