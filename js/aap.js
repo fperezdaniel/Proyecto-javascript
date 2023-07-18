@@ -41,7 +41,7 @@ function mostrarDetalle(e) {
     console.log(btnComprar);
     btnComprar.addEventListener("click", () => alert(`Felicidades realizaste la compra de ${productoEnContrado.nombre}`));
     const btnCancelar = document.getElementsByClassName(".none");
-    btnCancelar.addEventListener("click", (e)=>{
+    btnCancelar.addEventListener("click", (e) => {
         eliminarProducto(cardDos, id);
     })
 }
@@ -55,7 +55,7 @@ function eliminarProducto(carrito, idProducto) {
     } else {
         console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
     }
-} 
+}
 /* function eliminarProductos(id) {
     carrito = carrito.filter((producto) => producto.id !== id)
     localStorage.setItem("carrito", JSON.stringify(carrito))
@@ -81,3 +81,44 @@ function agregarAlCarrito(e) {
 
 
 mostrarProductos(productos);
+///////////////////////////////////formulario
+const consultaUsuario = [];
+console.log(consultaUsuario);
+const form = document.getElementById("formulario");
+function formulario() {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const nombre = document.getElementById("nombre").value;
+        const apellido = document.getElementById("apellido").value;
+        const email = document.getElementById("email").value;
+        const textArea = document.getElementById("comentario").value;
+
+        const consulta = {
+            nombre: nombre,
+            apellido: apellido,
+            email: email,
+            textArea: textArea
+        };
+        consultaUsuario.push(consulta);
+
+        const validacionFormulario = consulta.nombre != "" && consulta.apellido != "" && consulta.email != "" && consulta.textArea != "";
+        !validacionFormulario ? Swal.fire({
+            icon: 'error',
+            title: 'Algo salio mal ....!!!!',
+            confirmButtonText:`Aceptar`,
+            text: 'Por favor completar todos los campos',
+        }) : Swal.fire({
+            title: 'Nos contactaremos a la brevedad con usted ...!!!',
+            confirmButtonText:`Aceptar`,
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+        });
+    });
+
+}
+
+formulario()
