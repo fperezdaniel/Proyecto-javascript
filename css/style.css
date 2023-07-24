@@ -179,6 +179,13 @@ img{
         background-color: rgb(239, 233, 233);
         color: #3771f8;
     }
+    /* Modal de descripcion de productos*/
+    .contenedor__modal{
+        border: 5px solid black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
     .button__detalles {
         display: block;
         background-color: #3771f8;
@@ -188,6 +195,21 @@ img{
         text-transform: uppercase;
         border-radius: 10px;
     }
+    .product__description{
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    .none{
+        background-color: red;
+    }
+    .titulo--description{
+        font-size: 20px;
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    /*Fin de modal descripcion de productos*/
     /* Footer */
     .footer__container {
         height: 500px;

@@ -1,6 +1,19 @@
 const contenedorCard = document.getElementById("contenedorCards");
 console.log(contenedorCard);
 
+const obtenerProductos = async () => {
+    const res = await fetch('./js/productos.json');
+    const data = await res.json();
+    return data;
+}
+
+
+
+
+obtenerProductos().then(data => mostrarProductos(data));
+
+
+
 function mostrarProductos(itemsProductos) {
     itemsProductos.forEach(el => {
         const card = document.createElement("div");
@@ -20,30 +33,38 @@ function mostrarProductos(itemsProductos) {
 }
 
 function mostrarDetalle(e) {
-    const contenedorDetalle = document.getElementById("detalle-producto");
-    contenedorDetalle.innerHTML = ``;
-    console.log(contenedorDetalle);
-    const id = parseInt(e.target.id);
-    const productoEnContrado = productos.find(p => p.id === id);
-    console.log(productoEnContrado);
-    const cardDos = document.createElement("div");
-    cardDos.setAttribute("class", "contenedor__modal")
-    cardDos.innerHTML = `
-    <img src="${productoEnContrado.img}" alt="${productoEnContrado.nombre}">
-    <p class="product__description">${productoEnContrado.nombre}</p>
-    <p>$${productoEnContrado.precio}</p>
-    <button id="${productoEnContrado.id}" class="button__detalles">Comprar</button>
-    <button  class="button__detalles none">Cancelar</button>
-    `;
-    contenedorDetalle.appendChild(cardDos);
+    obtenerProductos().then(productos => {
+        const contenedorDetalle = document.getElementById("detalle-producto");
+        contenedorDetalle.innerHTML = ``;
+        console.log(contenedorDetalle);
+        const id = parseInt(e.target.id);
+        const productoEnContrado = productos.find(p => p.id === id);
+        console.log(productoEnContrado);
+        const cardDos = document.createElement("div");
+        cardDos.setAttribute("class", "contenedor__modal")
+        cardDos.innerHTML = `
+        <img src="${productoEnContrado.img}" alt="${productoEnContrado.nombre}">
+        <div class= "div--container">
+        <p class="titulo--description">Detalle del Producto</p>
+        <p class="product__description">${productoEnContrado.nombre}</p>
+        </div>
+        <div><p class="product__description">$${productoEnContrado.precio}</p>
+        </div>
+        <div>
+        <button id="${productoEnContrado.id}" class="button__detalles">Comprar</button>
+        <button  class="button__detalles none">Cancelar</button>
+        </div>
+        `;
+        contenedorDetalle.appendChild(cardDos);
+        const btnComprar = document.querySelector(".button__detalles");
+        console.log(btnComprar);
+        btnComprar.addEventListener("click", () => alert(`Felicidades realizaste la compra de ${productoEnContrado.nombre}`));
+        const btnCancelar = document.getElementsByClassName(".none");
+        btnCancelar.addEventListener("click", (e) => {
+            eliminarProducto(cardDos, id);
+        });
+    });
 
-    const btnComprar = document.querySelector(".button__detalles");
-    console.log(btnComprar);
-    btnComprar.addEventListener("click", () => alert(`Felicidades realizaste la compra de ${productoEnContrado.nombre}`));
-    const btnCancelar = document.getElementsByClassName(".none");
-    btnCancelar.addEventListener("click", (e) => {
-        eliminarProducto(cardDos, id);
-    })
 }
 
 
@@ -56,11 +77,6 @@ function eliminarProducto(carrito, idProducto) {
         console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
     }
 }
-/* function eliminarProductos(id) {
-    carrito = carrito.filter((producto) => producto.id !== id)
-    localStorage.setItem("carrito", JSON.stringify(carrito))
-    mostrarCarrito()
-} */
 
 
 
@@ -68,6 +84,7 @@ function eliminarProducto(carrito, idProducto) {
 
 
 const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
+console.log(carritoArray);
 function agregarAlCarrito(e) {
     const id = parseInt(e.target.id)
     let productoEnLista = productos.find(prod => prod.id === id);
@@ -80,7 +97,11 @@ function agregarAlCarrito(e) {
 
 
 
-mostrarProductos(productos);
+
+
+
+
+
 ///////////////////////////////////formulario
 const consultaUsuario = [];
 console.log(consultaUsuario);
@@ -107,13 +128,13 @@ function formulario() {
             title: 'Algo salio mal ....!!!!',
             confirmButtonText: `Aceptar`,
             text: 'Por favor completar todos los campos',
-            
-            confirmButtonColor:' #3771f8',
-            
+
+            confirmButtonColor: ' #3771f8',
+
         }) : Swal.fire({
             title: 'Nos contactaremos a la brevedad con usted ...!!!',
             confirmButtonText: `Aceptar`,
-            confirmButtonColor:' #3771f8',
+            confirmButtonColor: ' #3771f8',
             showClass: {
                 popup: 'animate__animated animate__fadeInDown'
             },
