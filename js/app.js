@@ -35,7 +35,6 @@ function mostrarProductos(itemsProductos) {
 function mostrarDetalle(e) {
     obtenerProductos().then(productos => {
         const contenedorDetalle = document.getElementById("detalle-producto");
-        contenedorDetalle.innerHTML = ``;
         console.log(contenedorDetalle);
         const id = parseInt(e.target.id);
         const productoEnContrado = productos.find(p => p.id === id);
@@ -51,48 +50,95 @@ function mostrarDetalle(e) {
         <div><p class="product__description">$${productoEnContrado.precio}</p>
         </div>
         <div>
-        <button id="${productoEnContrado.id}" class="button__detalles">Comprar</button>
-        <button  class="button__detalles none">Cancelar</button>
+        <button id="${productoEnContrado.id}" class="button__detalles agregar-carrito">Agregar al carrito</button>
         </div>
         `;
         contenedorDetalle.appendChild(cardDos);
-        const btnComprar = document.querySelector(".button__detalles");
+        const btnComprar = document.querySelector(".agregar-carrito");
         console.log(btnComprar);
-        btnComprar.addEventListener("click", () => alert(`Felicidades realizaste la compra de ${productoEnContrado.nombre}`));
-        const btnCancelar = document.getElementsByClassName(".none");
-        btnCancelar.addEventListener("click", (e) => {
-            eliminarProducto(cardDos, id);
-        });
+        btnComprar.addEventListener("click", agregarAlCarrito);
+        //const btnCancelar = document.getElementById(`btn-cancelar -${productoEnContrado.id}`);
+        //btnCancelar.addEventListener("click", (e) => {
+        //    eliminarProducto(cardDos, id);
+        //});
     });
 
 }
+const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
+console.log(carritoArray);
+function agregarAlCarrito(e) {
+    obtenerProductos().then(productos => {
+        const id = parseInt(e.target.id)
+        let productoEnLista = productos.find(prod => prod.id === id);
+        carritoArray.push(productoEnLista);
+        console.log(carritoArray);
+        //storage(carritoArray);
+    })
 
+
+}
+
+
+
+
+/* 
 
 function eliminarProducto(carrito, idProducto) {
     const indice = carrito.findIndex(producto => producto.id === idProducto);
     if (indice !== -1) {
         carrito.splice(indice, 1);
-        console.log(`El producto con ID ${idProducto} ha sido eliminado del carrito.`);
+        console.log(`El producto  ${idProducto} ha sido eliminado del carrito.`);
     } else {
         console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
     }
 }
+ */
 
 
 
 
 
 
-const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
-console.log(carritoArray);
-function agregarAlCarrito(e) {
-    const id = parseInt(e.target.id)
-    let productoEnLista = productos.find(prod => prod.id === id);
-    carritoArray.push(productoEnLista);
-    console.log(carritoArray);
-    storage(carritoArray);
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
