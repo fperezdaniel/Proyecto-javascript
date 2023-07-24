@@ -79,9 +79,9 @@ function agregarAlCarrito(e) {
 }
 function mostrarCarrito() {
     carritoArray.forEach(prod => {
-        const contenedorCompra = getElementById("compra--producto");
+        const contenedorCompra = document.getElementById("compra--section");
         cardTres = document.createElement("div");
-        cardTres = setAttribute("class", "contenedor__modal");
+        cardTres.setAttribute("class", "contenedor__mostrar__carrito");
         cardTres.innerHTML = `<img src="${prod.img}" alt="${prod.nombre}">
         <div class= "div--container">
         <p class="titulo--description">Detalle del Producto</p>
@@ -96,7 +96,9 @@ function mostrarCarrito() {
         `;
         contenedorCompra.appendChild(cardTres);
     });
-    const btnCompra = querySelector(".btn-compra");
+    const btnCompra = document.querySelector(".btn-compra");
+    console.log(btnCompra);
+    
 }
 
 mostrarCarrito()
