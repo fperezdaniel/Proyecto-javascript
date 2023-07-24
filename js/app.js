@@ -35,6 +35,7 @@ function mostrarProductos(itemsProductos) {
 function mostrarDetalle(e) {
     obtenerProductos().then(productos => {
         const contenedorDetalle = document.getElementById("detalle-producto");
+        contenedorDetalle.innerHTML = ``;
         console.log(contenedorDetalle);
         const id = parseInt(e.target.id);
         const productoEnContrado = productos.find(p => p.id === id);
@@ -54,16 +55,17 @@ function mostrarDetalle(e) {
         </div>
         `;
         contenedorDetalle.appendChild(cardDos);
-        const btnComprar = document.querySelector(".agregar-carrito");
-        console.log(btnComprar);
-        btnComprar.addEventListener("click", agregarAlCarrito);
+        const btnAgregarCarrito = document.querySelector(".agregar-carrito");
+        console.log(btnAgregarCarrito);
+        btnAgregarCarrito.addEventListener("click", agregarAlCarrito);
         //const btnCancelar = document.getElementById(`btn-cancelar -${productoEnContrado.id}`);
         //btnCancelar.addEventListener("click", (e) => {
         //    eliminarProducto(cardDos, id);
         //});
     });
-
 }
+
+
 const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
 console.log(carritoArray);
 function agregarAlCarrito(e) {
@@ -72,14 +74,32 @@ function agregarAlCarrito(e) {
         let productoEnLista = productos.find(prod => prod.id === id);
         carritoArray.push(productoEnLista);
         console.log(carritoArray);
-        //storage(carritoArray);
+
     })
-
-
+}
+function mostrarCarrito() {
+    carritoArray.forEach(prod => {
+        const contenedorCompra = getElementById("compra--producto");
+        cardTres = document.createElement("div");
+        cardTres = setAttribute("class", "contenedor__modal");
+        cardTres.innerHTML = `<img src="${prod.img}" alt="${prod.nombre}">
+        <div class= "div--container">
+        <p class="titulo--description">Detalle del Producto</p>
+        <p class="product__description">${prod.nombre}</p>
+        </div>
+        <div><p class="product__description">$${prod.precio}</p>
+        </div>
+        <div>
+        <button id="${prod.id}" class="button__detalles btn-compra">Comprar</button>
+        <button id="${prod.id}" class="button__detalles btn-cancelar">Comprar</button>
+        </div>
+        `;
+        contenedorCompra.appendChild(cardTres);
+    });
+    const btnCompra = querySelector(".btn-compra");
 }
 
-
-
+mostrarCarrito()
 
 /* 
 
