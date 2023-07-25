@@ -1,15 +1,18 @@
 const contenedorCard = document.getElementById("contenedorCards");
 console.log(contenedorCard);
+const contenedorCompra = document.getElementById("compra--section");
+console.log(contenedorCompra);
+
+
+
+
+
 
 const obtenerProductos = async () => {
     const res = await fetch('./js/productos.json');
     const data = await res.json();
     return data;
 }
-
-
-
-
 obtenerProductos().then(data => mostrarProductos(data));
 
 
@@ -58,7 +61,7 @@ function mostrarDetalle(e) {
         const btnAgregarCarrito = document.querySelector(".agregar-carrito");
         console.log(btnAgregarCarrito);
         btnAgregarCarrito.addEventListener("click", agregarAlCarrito);
-
+    
     });
 }
 
@@ -71,13 +74,17 @@ function agregarAlCarrito(e) {
         let productoEnLista = productos.find(prod => prod.id === id);
         carritoArray.push(productoEnLista);
         console.log(carritoArray);
-
+        localStorage.setItem("producto", JSON.stringify(carritoArray));
+        mostrarCarrito();
     })
 }
+
+
+
 function mostrarCarrito() {
+    contenedorCompra.innerHTML = ``;
     carritoArray.forEach(prod => {
-        const contenedorCompra = document.getElementById("compra--section");
-        cardTres = document.createElement("div");
+        const cardTres = document.createElement("div");
         cardTres.setAttribute("class", "contenedor__mostrar__carrito");
         cardTres.innerHTML = ` 
         <div class= "modal-productos--container">
@@ -90,20 +97,19 @@ function mostrarCarrito() {
         </div>
         <div class="btn--productos--container">
         <button id="${prod.id}" class="button--productos">Comprar</button>
-        <button id="${prod.id}"class="button--productos cancelar">Cancelar</button>
+        <button id="btn-${prod.id}" class="button--productos cancelar">Cancelar</button>
         </div>`;
         contenedorCompra.appendChild(cardTres);
+        const btnCancelar = document.getElementById(`btn-${prod.id}`);
+        console.log(btnCancelar);
+        btnCancelar.addEventListener("click", (e) => {
+            eliminarProducto(carritoArray, prod.id);
+        });
     });
-    const btnCompra = document.querySelector(".btn-compra");
-    console.log(btnCompra);
-    //const btnCancelar = document.getElementById(`btn-cancelar -${productoEnContrado.id}`);
-    const btnCancelar = document.querySelector(".cancelar")
-    btnCancelar.addEventListener("click", (e) => {
-        eliminarProducto(cardTres, id);
-    });
+
 }
 
-mostrarCarrito()
+
 
 
 
@@ -112,66 +118,12 @@ function eliminarProducto(carrito, idProducto) {
     if (indice !== -1) {
         carrito.splice(indice, 1);
         console.log(`El producto  ${idProducto} ha sido eliminado del carrito.`);
+        mostrarCarrito();
     } else {
         console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
+        mostrarCarrito();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ///////////////////////////////////formulario
 const consultaUsuario = [];
 console.log(consultaUsuario);
