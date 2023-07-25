@@ -82,18 +82,19 @@ function mostrarCarrito() {
         const contenedorCompra = document.getElementById("compra--section");
         cardTres = document.createElement("div");
         cardTres.setAttribute("class", "contenedor__mostrar__carrito");
-        cardTres.innerHTML = `<img src="${prod.img}" alt="${prod.nombre}">
-        <div class= "div--container">
-        <p class="titulo--description">Detalle del Producto</p>
-        <p class="product__description">${prod.nombre}</p>
+        cardTres.innerHTML = ` 
+        <div class= "modal-productos--container">
+        <p class="titulo--description">Producto</p>
+        <p class="titulo--description">${prod.nombre}</p>
+        <p class="product__description">$${prod.precio}</p>
         </div>
-        <div><p class="product__description">$${prod.precio}</p>
+        <div class= "modal--precio">
+        
         </div>
-        <div>
-        <button id="${prod.id}" class="button__detalles btn-compra">Comprar</button>
-        <button id="${prod.id}" class="button__detalles btn-cancelar">Comprar</button>
-        </div>
-        `;
+        <div class="btn--productos--container">
+        <button id="${prod.id}" class="button--productos">Comprar</button>
+        <button id="${prod.id}"class="button--productos cancelar">Cancelar</button>
+        </div>`;
         contenedorCompra.appendChild(cardTres);
     });
     const btnCompra = document.querySelector(".btn-compra");
