@@ -58,10 +58,7 @@ function mostrarDetalle(e) {
         const btnAgregarCarrito = document.querySelector(".agregar-carrito");
         console.log(btnAgregarCarrito);
         btnAgregarCarrito.addEventListener("click", agregarAlCarrito);
-        //const btnCancelar = document.getElementById(`btn-cancelar -${productoEnContrado.id}`);
-        //btnCancelar.addEventListener("click", (e) => {
-        //    eliminarProducto(cardDos, id);
-        //});
+
     });
 }
 
@@ -99,12 +96,16 @@ function mostrarCarrito() {
     });
     const btnCompra = document.querySelector(".btn-compra");
     console.log(btnCompra);
-    
+    //const btnCancelar = document.getElementById(`btn-cancelar -${productoEnContrado.id}`);
+    const btnCancelar = document.querySelector(".cancelar")
+    btnCancelar.addEventListener("click", (e) => {
+        eliminarProducto(cardTres, id);
+    });
 }
 
 mostrarCarrito()
 
-/* 
+
 
 function eliminarProducto(carrito, idProducto) {
     const indice = carrito.findIndex(producto => producto.id === idProducto);
@@ -115,7 +116,7 @@ function eliminarProducto(carrito, idProducto) {
         console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
     }
 }
- */
+
 
 
 
