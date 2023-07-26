@@ -76,9 +76,9 @@ function agregarAlCarrito(e) {
         console.log(carritoArray);
         localStorage.setItem("producto", JSON.stringify(carritoArray));
         mostrarCarrito();
+
     })
 }
-
 
 
 function mostrarCarrito() {
@@ -109,7 +109,7 @@ function mostrarCarrito() {
 
 }
 
-
+mostrarCarrito();
 
 
 
