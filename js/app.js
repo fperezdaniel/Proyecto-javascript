@@ -103,25 +103,43 @@ function mostrarCarrito() {
         <p class="product__description">$${prod.precio * prod.cantidad}</p>
         </div>
         <div class="btn--productos--container">
-        <button id="btn--compra${prod.id}" class="button--productos">Comprar</button>
-        <button id="btn-${prod.id}" class="button--productos cancelar">Cancelar</button>
+        <button id="btn-${prod.id}" class="button--productos cancelar">Eliminar</button>
         </div>`;
         contenedorCompra.appendChild(cardTres);
-        const btnCompra = document.getElementById(`btn--compra${prod.id}`);
-        console.log(btnCompra);
-        btnCompra.addEventListener("click", (e)=> {
-            compraDeProducto(carritoArray, prod.id);
-        });
         const btnCancelar = document.getElementById(`btn-${prod.id}`);
         console.log(btnCancelar);
         btnCancelar.addEventListener("click", (e) => {
             eliminarProducto(carritoArray, prod.id);
         });
     });
-
+    const btnFinalizar = document.createElement("button");
+    btnFinalizar.innerText = "Finalizar Compra";
+    btnFinalizar.setAttribute("class", "btn-finalizar-compra");
+    btnFinalizar.addEventListener("click", finalizarCompra);
+    contenedorCompra.appendChild(btnFinalizar);
+    const cardCinco = document.createElement("div");
+    cardCinco.setAttribute("class", "precio--final");
+    cardCinco.innerHTML = `<p class="product__description">$${}</p>`;
+    contenedorCompra.appendChild(cardCinco);
 }
 
+function finalizarCompra(e){
+    e.preventDefault();
+    const carritoFinal = carritoArray.reduce( (acc, prod) => acc += prod.precio * prod.cantidad, 0);
+    console.log(carritoFinal);
+}
+
+
 mostrarCarrito();
+
+
+
+
+
+
+
+
+
 
 
 
@@ -183,3 +201,10 @@ function formulario() {
 }
 
 formulario()
+
+
+
+
+
+
+
