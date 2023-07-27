@@ -61,22 +61,31 @@ function mostrarDetalle(e) {
         const btnAgregarCarrito = document.querySelector(".agregar-carrito");
         console.log(btnAgregarCarrito);
         btnAgregarCarrito.addEventListener("click", agregarAlCarrito);
-    
+
     });
 }
 
 
 const carritoArray = JSON.parse(localStorage.getItem("producto")) || [];
 console.log(carritoArray);
+
+
 function agregarAlCarrito(e) {
     obtenerProductos().then(productos => {
         const id = parseInt(e.target.id)
         let productoEnLista = productos.find(prod => prod.id === id);
-        carritoArray.push(productoEnLista);
-        console.log(carritoArray);
-        localStorage.setItem("producto", JSON.stringify(carritoArray));
-        mostrarCarrito();
-
+        const productoCarrito = carritoArray.find((producto) => producto.id === id)
+        if (productoCarrito) {
+            productoCarrito.cantidad++
+            localStorage.setItem("producto", JSON.stringify(carritoArray));
+            mostrarCarrito();
+        } else {
+            productoEnLista.cantidad = 1;
+            carritoArray.push(productoEnLista);
+            console.log(carritoArray);
+            localStorage.setItem("producto", JSON.stringify(carritoArray));
+            mostrarCarrito();
+        }
     })
 }
 
@@ -90,16 +99,19 @@ function mostrarCarrito() {
         <div class= "modal-productos--container">
         <p class="titulo--description">Producto</p>
         <p class="titulo--description">${prod.nombre}</p>
-        <p class="product__description">$${prod.precio}</p>
-        </div>
-        <div class= "modal--precio">
-        
+        <p class="titulo--description">Cantidad :${prod.cantidad}</p>
+        <p class="product__description">$${prod.precio * prod.cantidad}</p>
         </div>
         <div class="btn--productos--container">
-        <button id="${prod.id}" class="button--productos">Comprar</button>
+        <button id="btn--compra${prod.id}" class="button--productos">Comprar</button>
         <button id="btn-${prod.id}" class="button--productos cancelar">Cancelar</button>
         </div>`;
         contenedorCompra.appendChild(cardTres);
+        const btnCompra = document.getElementById(`btn--compra${prod.id}`);
+        console.log(btnCompra);
+        btnCompra.addEventListener("click", (e)=> {
+            compraDeProducto(carritoArray, prod.id);
+        });
         const btnCancelar = document.getElementById(`btn-${prod.id}`);
         console.log(btnCancelar);
         btnCancelar.addEventListener("click", (e) => {
@@ -118,9 +130,11 @@ function eliminarProducto(carrito, idProducto) {
     if (indice !== -1) {
         carrito.splice(indice, 1);
         console.log(`El producto  ${idProducto} ha sido eliminado del carrito.`);
+        localStorage.setItem("producto", JSON.stringify(carritoArray));
         mostrarCarrito();
     } else {
         console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
+        localStorage.setItem("producto", JSON.stringify(carritoArray));
         mostrarCarrito();
     }
 }
