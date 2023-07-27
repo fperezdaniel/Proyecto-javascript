@@ -113,8 +113,9 @@ function mostrarCarrito() {
         });
     });
     const btnFinalizar = document.createElement("button");
+    btnFinalizar.innerHTML = ``;
     btnFinalizar.innerText = "Finalizar Compra";
-    btnFinalizar.setAttribute("class", "btn-finalizar-compra");
+    btnFinalizar.setAttribute("class", "button__detalles agregar-carrito");
     btnFinalizar.addEventListener("click", finalizarCompra);
     contenedorCompra.appendChild(btnFinalizar);
     
@@ -128,22 +129,12 @@ function finalizarCompra(e){
     totalProductoEnDOM.innerHTML =``;
     totalProductoEnDOM.setAttribute("class", "precio--final");
     costoTotal.appendChild(totalProductoEnDOM);
-    swal.fire(`El costo total es de: ${precioFinal}. Muchas gracias por su compra ....!!!`);
-    
+    swal.fire(`El costo total es de:$${precioFinal}. Muchas gracias por su compra ....!!!`);
+    contenedorCompra.innerHTML = ``;
 }
 
 
 mostrarCarrito();
-
-
-
-
-
-
-
-
-
-
 
 
 function eliminarProducto(carrito, idProducto) {
