@@ -145,7 +145,7 @@ function eliminarProducto(carrito, idProducto) {
         localStorage.setItem("producto", JSON.stringify(carritoArray));
         mostrarCarrito();
     } else {
-        console.log(`No se encontró ningún producto con ID ${idProducto} en el carrito.`);
+        swal.fire(`No se encontro ningun producto `);
         localStorage.setItem("producto", JSON.stringify(carritoArray));
         mostrarCarrito();
     }
