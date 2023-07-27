@@ -2,7 +2,7 @@ const contenedorCard = document.getElementById("contenedorCards");
 console.log(contenedorCard);
 const contenedorCompra = document.getElementById("compra--section");
 console.log(contenedorCompra);
-
+const costoTotal = document.getElementById("costo--total");
 
 
 
@@ -117,16 +117,17 @@ function mostrarCarrito() {
     btnFinalizar.setAttribute("class", "btn-finalizar-compra");
     btnFinalizar.addEventListener("click", finalizarCompra);
     contenedorCompra.appendChild(btnFinalizar);
-    const cardCinco = document.createElement("div");
-    cardCinco.setAttribute("class", "precio--final");
-    cardCinco.innerHTML = `<p class="product__description">$${}</p>`;
-    contenedorCompra.appendChild(cardCinco);
+    
 }
 
 function finalizarCompra(e){
     e.preventDefault();
     const carritoFinal = carritoArray.reduce( (acc, prod) => acc += prod.precio * prod.cantidad, 0);
     console.log(carritoFinal);
+    const cardCinco = document.createElement("div");
+    cardCinco.setAttribute("class", "precio--final");
+    cardCinco.innerHTML = `<p class="product__description">${carritoFinal}</p>`;
+    costoTotal.appendChild(cardCinco);
 }
 
 
