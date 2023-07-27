@@ -122,12 +122,14 @@ function mostrarCarrito() {
 
 function finalizarCompra(e){
     e.preventDefault();
-    const carritoFinal = carritoArray.reduce( (acc, prod) => acc += prod.precio * prod.cantidad, 0);
-    console.log(carritoFinal);
-    const cardCinco = document.createElement("div");
-    cardCinco.setAttribute("class", "precio--final");
-    cardCinco.innerHTML = `<p class="product__description">${carritoFinal}</p>`;
-    costoTotal.appendChild(cardCinco);
+    const precioFinal = carritoArray.reduce( (acc, prod) => acc += prod.precio * prod.cantidad, 0);
+    console.log(precioFinal);
+    const totalProductoEnDOM = document.createElement("div");
+    totalProductoEnDOM.innerHTML =``;
+    totalProductoEnDOM.setAttribute("class", "precio--final");
+    costoTotal.appendChild(totalProductoEnDOM);
+    swal.fire(`El costo total es de: ${precioFinal}. Muchas gracias por su compra ....!!!`);
+    
 }
 
 
@@ -148,7 +150,7 @@ function eliminarProducto(carrito, idProducto) {
     const indice = carrito.findIndex(producto => producto.id === idProducto);
     if (indice !== -1) {
         carrito.splice(indice, 1);
-        console.log(`El producto  ${idProducto} ha sido eliminado del carrito.`);
+        swal.fire(`El producto se elimino correctamente...!! `);
         localStorage.setItem("producto", JSON.stringify(carritoArray));
         mostrarCarrito();
     } else {
