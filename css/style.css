@@ -245,13 +245,13 @@ img {
 
 @media screen and (max-width:420px) {
     .titulo--description {
-        font-size: 15px;
+        font-size: 13px;
     }
 }
 
 @media only screen and (min-width:421px) and (max-width:960px) {
     .titulo--description {
-        font-size: 15px;
+        font-size: 13px;
     }
 }
 
