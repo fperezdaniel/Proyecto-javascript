@@ -318,6 +318,9 @@ img {
 
 
 /* Fin compra o cancelacion de productos*/
+.agregar-carrito{
+    margin: 20px auto;
+}
 @media screen and (max-width:420px) {
     .agregar-carrito{
         margin: 20px auto;
