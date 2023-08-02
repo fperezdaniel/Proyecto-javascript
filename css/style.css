@@ -186,6 +186,20 @@ img {
     border-radius: 10px;
 }
 
+@media screen and (max-width:420px) {
+    .button__agregar {
+        width: 180px;
+        height: 35px;
+    }
+}
+
+@media only screen and (min-width:421px) and (max-width:960px) {
+    .button__agregar {
+        width: 180px;
+        height: 35px;
+    }
+}
+
 .button__agregar:hover {
     background-color: rgb(239, 233, 233);
     color: #3771f8;
@@ -229,6 +243,20 @@ img {
     height: 40px;
     text-transform: uppercase;
     border-radius: 10px;
+}
+
+@media screen and (max-width:420px) {
+    .button__detalles {
+        width: 180px;
+        height: 35px;
+    }
+}
+
+@media only screen and (min-width:421px) and (max-width:960px) {
+    .button__detalles {
+        width: 180px;
+        height: 35px;
+    }
 }
 
 .product__description {
@@ -309,6 +337,20 @@ img {
     border-radius: 10px;
 }
 
+@media screen and (max-width:420px) {
+    .button--productos {
+        width: 180px;
+        height: 35px;
+    }
+}
+
+@media only screen and (min-width:421px) and (max-width:960px) {
+    .button--productos {
+        width: 180px;
+        height: 35px;
+    }
+}
+
 .cancelar {
     background-color: red;
 }
@@ -318,19 +360,22 @@ img {
 
 
 /* Fin compra o cancelacion de productos*/
-.agregar-carrito{
+.agregar-carrito {
     margin: 20px auto;
 }
+
 @media screen and (max-width:420px) {
-    .agregar-carrito{
+    .agregar-carrito {
         margin: 20px auto;
     }
 }
-@media only screen and (min-width:421px) and (max-width:960px){
-    .agregar-carrito{
+
+@media only screen and (min-width:421px) and (max-width:960px) {
+    .agregar-carrito {
         margin: 20px auto;
     }
 }
+
 /* Footer */
 .footer__container {
     height: 500px;
